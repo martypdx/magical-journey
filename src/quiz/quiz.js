@@ -3,7 +3,11 @@ import quizApi from '../services/quiz-api.js';
 import htmlToDOM from '../html-to-dom.js';
 import toTitleCase from './to-title-case.js';
 
-const user = userApi.safeGet();
+if(!userApi.hasUser()) {
+    window.location = './';
+}
+
+const user = userApi.get();
 
 const params = new URLSearchParams(window.location.search);
 const category = params.get('category');
@@ -14,8 +18,8 @@ if(!quiz) {
 }
 
 document.title = toTitleCase(category) + ' ' + document.title;
-const title = document.getElementById('quiz-title');
-title.textContent = quiz.title;
+const header = document.getElementById('quiz-header');
+header.textContent = quiz.title;
 
 const container = document.getElementById('answers-container');
 const answers = quiz.answers;

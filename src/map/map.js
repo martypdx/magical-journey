@@ -2,7 +2,12 @@ import userApi from '../services/user-api.js';
 import quizApi from '../services/quiz-api.js';
 import htmlToDOM from '../html-to-dom.js';
 
-const user = userApi.safeGet();
+if(!userApi.hasUser()) {
+    window.location = './';
+}
+
+const user = userApi.get();
+
 const answers = user.answers;
 
 const quizzes = quizApi.getAll();
@@ -13,7 +18,7 @@ for(let i = 0; i < quizzes.length; i++) {
     if(answers[quiz.category]) {
         continue;
     }
-    const quizLink = makeLink(quizzes[0]);
+    const quizLink = makeLink(quiz);
     nav.appendChild(quizLink);
 }
 

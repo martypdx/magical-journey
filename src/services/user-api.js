@@ -11,14 +11,9 @@ const userApi = {
         return json ? JSON.parse(json) : null;
     },
 
-    safeGet() {
+    hasUser() {
         const user = userApi.get();
-        if(!user) {
-            window.location = './';
-        }
-        else {
-            return user;
-        }
+        return !!user;
     }
 };
 

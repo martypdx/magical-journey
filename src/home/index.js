@@ -2,7 +2,7 @@ import userApi from '../services/user-api.js';
 
 const form = document.getElementById('sign-in');
 
-form.addEventListener('submit', event => {
+form.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const user = { 

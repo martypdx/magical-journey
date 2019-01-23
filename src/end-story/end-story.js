@@ -2,19 +2,23 @@ import userApi from '../services/user-api.js';
 import quizApi from '../services/quiz-api.js';
 import htmlToDOM from '../html-to-dom.js';
 
-const user = userApi.safeGet();
+if(!userApi.hasUser()) {
+    window.location = './';
+}
+
+const user = userApi.get();
 
 const userName = document.getElementById('user-name');
 userName.textContent = user.name;
 
 const main = document.querySelector('main');
-const answers = user.answers;
-const categories = Object.keys(answers);
 
-for(let i = 0; i < categories.length; i++) {
-    const category = categories[i];
-    const answer = answers[category];
-    const quiz = quizApi.get(category);
+const quizzes = quizApi.getAll();
+const answers = user.answers;
+
+for(let i = 0; i < quizzes.length; i++) {
+    const quiz = quizzes[i];
+    const answer = answers[quiz.category];
 
     const result = makeResult(quiz.story, answer);
     main.appendChild(result);
