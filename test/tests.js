@@ -1,6 +1,5 @@
 import toUpperCase from '../src/quiz/to-title-case.js';
 import htmlToDom from '../src/html-to-dom.js';
-import makeResult from '../src/end-story/make-result.js';
 
 const test = QUnit.test;
 const module = QUnit.module;
